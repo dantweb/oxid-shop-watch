@@ -90,7 +90,6 @@ final class QueryBuilder
             ->from($this->connection->quoteIdentifier($request->getTableName()));
 
         // Add WHERE conditions
-        $parameters = [];
         $paramIndex = 0;
 
         foreach ($request->getWhereClause() as $fieldName => $value) {
@@ -98,14 +97,18 @@ final class QueryBuilder
             $queryBuilder->andWhere(
                 $this->connection->quoteIdentifier($fieldName) . ' = :' . $paramName
             );
-            $parameters[$paramName] = $value;
+            $queryBuilder->setParameter($paramName, $value);
         }
 
         // LIMIT 1 - we only need one row
         $queryBuilder->setMaxResults(1);
 
-        // Execute query with bound parameters
-        $result = $queryBuilder->executeQuery($parameters)->fetchAssociative();
+        // Execute query - compatible with DBAL 2.x and 3.x
+        /** @var \Doctrine\DBAL\Result|\Doctrine\DBAL\Driver\Statement $stmt */
+        $stmt = $queryBuilder->execute();
+
+        // fetchAssociative works on both Result (DBAL 3.x) and Statement (DBAL 2.x)
+        $result = $stmt->fetchAssociative();
 
         return $result ?: null;
     }

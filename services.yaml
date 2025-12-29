@@ -34,7 +34,6 @@ services:
     class: Dantweb\OxidShopWatch\Service\AuthenticationService
     arguments:
       - '@shopwatch.auth_config'
-      - '@shopwatch.ip_validator'
       - '@shopwatch.api_key_validator'
     public: true
 

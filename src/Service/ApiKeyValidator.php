@@ -19,7 +19,6 @@ use Dantweb\OxidShopWatch\Exception\AuthenticationException;
  */
 final class ApiKeyValidator
 {
-    private const API_KEY_LENGTH = 64;
     private const API_KEY_PATTERN = '/^[a-fA-F0-9]{64}$/';
 
     /**

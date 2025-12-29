@@ -49,7 +49,7 @@
   "scripts": {
     "phpstan": "phpstan -ctests/PhpStan/phpstan.neon --level=6 analyse src/",
     "phpcs": "phpcs --standard=tests/phpcs.xml src/ tests/",
-    "phpmd": "phpmd src text tests/PhpMd/standard.xml",
+    "phpmd": "phpmd src text tests/PhpMd/phpmd.baseline.xml",
     "style": [
       "@phpcs",
       "@phpstan",

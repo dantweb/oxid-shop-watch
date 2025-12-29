@@ -24,7 +24,6 @@ final class AuthenticationService
 {
     public function __construct(
         private readonly AuthConfig $config,
-        private readonly IpValidator $ipValidator,
         private readonly ApiKeyValidator $apiKeyValidator
     ) {
     }
