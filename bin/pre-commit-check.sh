@@ -156,8 +156,9 @@ else
     fi
 
     if [ "$ENVIRONMENT" = "github" ]; then
-      echo "skip on github"
-      PHPUNIT_STATUS=0
+        # GitHub Actions: Run using module's vendor phpunit
+        vendor/bin/phpunit -c tests/phpunit.xml $TESTSUITE_ARG
+        PHPUNIT_STATUS=$?
     else
         # Local: Run in Docker with module's bootstrap (use shop's vendor phpunit)
         docker compose exec -w /var/www/extensions/shop-watch -T php \

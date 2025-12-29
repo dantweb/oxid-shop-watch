@@ -104,7 +104,6 @@ final class QueryBuilder
         $queryBuilder->setMaxResults(1);
 
         // Execute query - compatible with DBAL 2.x and 3.x
-        /** @var \Doctrine\DBAL\Result|\Doctrine\DBAL\Driver\Statement $stmt */
         $stmt = $queryBuilder->execute();
 
         // fetchAssociative works on both Result (DBAL 3.x) and Statement (DBAL 2.x)
