@@ -62,9 +62,10 @@ foreach ($possibleBootstraps as $shopBootstrap) {
     }
 }
 
+// On GitHub Actions or standalone testing, OXID shop is not required for unit tests
 if (!$bootstrapLoaded) {
-    throw new \RuntimeException(
-        'Could not find OXID shop bootstrap.php. Module root: ' . $moduleRoot .
-        '. Tried: ' . implode(', ', $possibleBootstraps)
-    );
+    // Define minimal constants/stubs if needed for unit tests
+    if (!defined('OXID_PHP_UNIT')) {
+        define('OXID_PHP_UNIT', true);
+    }
 }
