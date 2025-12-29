@@ -1,0 +1,79 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: false
+    public: false
+
+  # Value Objects (created via factories, not as services)
+
+  # Auth Configuration
+  shopwatch.auth_config:
+    class: Dantweb\OxidShopWatch\ValueObject\AuthConfig
+    arguments:
+      - '%shopwatch.allowed_hosts%'
+
+  # Strategy Factory
+  shopwatch.operator_strategy_factory:
+    class: Dantweb\OxidShopWatch\Strategy\OperatorStrategyFactory
+    public: true
+
+  # Services
+  shopwatch.request_validator:
+    class: Dantweb\OxidShopWatch\Service\RequestValidator
+    public: true
+
+  shopwatch.api_key_validator:
+    class: Dantweb\OxidShopWatch\Service\ApiKeyValidator
+    public: true
+
+  shopwatch.ip_validator:
+    class: Dantweb\OxidShopWatch\Service\IpValidator
+    public: true
+
+  shopwatch.authentication_service:
+    class: Dantweb\OxidShopWatch\Service\AuthenticationService
+    arguments:
+      - '@shopwatch.auth_config'
+      - '@shopwatch.ip_validator'
+      - '@shopwatch.api_key_validator'
+    public: true
+
+  shopwatch.assumption_parser:
+    class: Dantweb\OxidShopWatch\Service\AssumptionParser
+    arguments:
+      - '@shopwatch.request_validator'
+    public: true
+
+  shopwatch.query_builder:
+    class: Dantweb\OxidShopWatch\Service\QueryBuilder
+    arguments:
+      - '@doctrine.dbal.connection'
+      - '@shopwatch.operator_strategy_factory'
+    public: true
+
+  shopwatch.audit_logger:
+    class: Dantweb\OxidShopWatch\Service\AuditLogger
+    arguments:
+      - '@oxid_esales.monolog.logger'
+    public: true
+
+  # Controller
+  shopwatch.controller.assumption:
+    class: Dantweb\OxidShopWatch\Controller\AssumptionController
+    arguments:
+      - '@shopwatch.authentication_service'
+      - '@shopwatch.assumption_parser'
+      - '@shopwatch.query_builder'
+      - '@shopwatch.audit_logger'
+      - '@oxid_esales.monolog.logger'
+    public: true
+    calls:
+      - [setContainer, ['@service_container']]
+
+parameters:
+  # ShopWatch configuration
+  # This should be loaded from module settings
+  shopwatch.enabled: false
+  shopwatch.allowed_hosts: []
+  shopwatch.rate_limit_enabled: false
+  shopwatch.rate_limit_per_minute: 100

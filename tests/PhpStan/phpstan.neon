@@ -1,0 +1,26 @@
+parameters:
+    level: 6
+    paths:
+        - ../../src
+    excludePaths:
+        - ../../vendor
+        - ../../var
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        # Legacy OXID function
+        - '#Function oxNew not found#'
+        # Legacy constant
+        - '#Constant VENDOR_PATH not found#'
+        # OXID Session::getBasket() PHPDoc says it always returns Basket, but runtime it can be null
+        - '#Strict comparison using !== between.*Basket and null will always evaluate to true#'
+        # Missing array value type in legacy code
+        - '#type has no value type specified in iterable type array#'
+        # Mixed type operations from OXID methods
+        - '#Cannot cast mixed to int#'
+        - '#Cannot cast mixed to string#'
+        - '#Cannot cast mixed to float#'
+        - '#Cannot access property .* on mixed#'
+        - '#Cannot call method .* on mixed#'
+        - '#Property .* does not accept mixed#'
+        - '#should return .* but returns mixed#'
+        - '#Parameter .* expects string, mixed given#'

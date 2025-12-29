@@ -1,0 +1,66 @@
+{
+  "name": "dantweb/oxid-shop-watch",
+  "description": "Shop Watch - E2E Testing API for OXID eShop 7",
+  "type": "oxideshop-module",
+  "keywords": [
+    "oxid",
+    "modules",
+    "eShop",
+    "testing",
+    "e2e"
+  ],
+  "homepage": "https://github.com/dantweb/oxid-shop-watch",
+  "license": [
+    "GPL-3.0"
+  ],
+  "extra": {
+    "oxideshop": {
+      "target-directory": "dantweb/oxid-shop-watch"
+    }
+  },
+  "conflict": {
+    "oxid-esales/oxideshop-ce": "<7.4"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "^8.2",
+    "doctrine/dbal": "^2.13"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^2.0.2",
+    "squizlabs/php_codesniffer": "^3.10",
+    "phpmd/phpmd": "^2.15",
+    "oxid-esales/oxideshop-ce": "dev-b-7.4.x",
+    "phpunit/phpunit": "^11.4",
+    "oxid-esales/developer-tools": "dev-b-7.4.x"
+  },
+  "autoload": {
+    "psr-4": {
+      "Dantweb\\OxidShopWatch\\": "./src",
+      "Dantweb\\OxidShopWatch\\Tests\\": "./tests"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OxidEsales\\EshopCommunity\\Tests\\": "./vendor/oxid-esales/oxideshop-ce/tests"
+    }
+  },
+  "scripts": {
+    "phpstan": "phpstan -ctests/PhpStan/phpstan.neon --level=6 analyse src/",
+    "phpcs": "phpcs --standard=tests/phpcs.xml src/ tests/",
+    "phpmd": "phpmd src text tests/PhpMd/standard.xml",
+    "style": [
+      "@phpcs",
+      "@phpstan",
+      "@phpmd"
+    ],
+    "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit -c tests/phpunit.xml"
+  },
+  "config": {
+    "allow-plugins": {
+      "oxid-esales/oxideshop-composer-plugin": true,
+      "oxid-esales/oxideshop-unified-namespace-generator": true
+    }
+  }
+}

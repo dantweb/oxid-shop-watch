@@ -1,0 +1,26 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# PHPUnit
+/.phpunit.result.cache
+/test-results/
+/reports/
+
+# Cache and temp files
+/var/
+/<sCompileDir>/
+*.cache
+
+# IDE
+/.idea/
+/.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Composer
+composer.lock
