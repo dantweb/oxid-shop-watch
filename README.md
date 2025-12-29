@@ -413,8 +413,8 @@ docker compose exec php vendor/bin/phpunit -c extensions/shop-watch/tests/phpuni
 
 ## License
 
-GPL-3.0
+CC - Creative Commons
 
 ## Author
 
-Dantweb
+Daniil Tkachev - [dantweb](https://github.com/dantweb)
