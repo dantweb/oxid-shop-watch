@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Texts of the settings in the classic admin (`views/admin_twig/{de,en}/shopwatch_lang.php`): the group and the four
+  settings showed their raw keys (`SHOP_MODULE_shopwatchEnabled`, …). `SettingsTranslationsTest` keeps every setting
+  translated.
+
 ## [1.0.0] - 2025-12-29
 
 ### Added
